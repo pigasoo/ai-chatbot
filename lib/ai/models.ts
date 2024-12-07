@@ -8,6 +8,7 @@ export interface Model {
 }
 
 export const models: Array<Model> = [
+  /**
   {
     id: 'gpt-4o-mini',
     label: 'GPT 4o mini',
@@ -20,6 +21,19 @@ export const models: Array<Model> = [
     apiIdentifier: 'gpt-4o',
     description: 'For complex, multi-step tasks',
   },
+   */
+  {
+    id: 'openai/gpt-4o',
+    label: 'OpenAI: GPT-4o',
+    apiIdentifier: 'openai/gpt-4o',
+    description: 'Small model for fast, lightweight tasks',
+  },
+  {
+    id: 'x-ai/grok-beta',
+    label: 'xAI: Grok Beta',
+    apiIdentifier: 'x-ai/grok-beta',
+    description: 'For complex, multi-step tasks',
+  },
 ] as const;
 
-export const DEFAULT_MODEL_NAME: string = 'gpt-4o-mini';
+export const DEFAULT_MODEL_NAME: string = 'openai/gpt-4o';

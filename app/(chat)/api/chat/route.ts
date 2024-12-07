@@ -11,6 +11,7 @@ import { auth } from '@/app/(auth)/auth';
 import { customModel } from '@/lib/ai';
 import { models } from '@/lib/ai/models';
 import { systemPrompt } from '@/lib/ai/prompts';
+import openrouterModel from '@/lib/ai/openrouter';
 import {
   deleteChatById,
   getChatById,
@@ -77,8 +78,9 @@ export async function POST(request: Request) {
   const chat = await getChatById({ id });
 
   if (!chat) {
-    const title = await generateTitleFromUserMessage({ message: userMessage });
-    await saveChat({ id, userId: session.user.id, title });
+    //const title = await generateTitleFromUserMessage({ message: userMessage });
+    //await saveChat({ id, userId: session.user.id, title });
+    await saveChat({ id, userId: session.user.id, title: 'New Chat' });
   }
 
   const userMessageId = generateUUID();
@@ -97,10 +99,12 @@ export async function POST(request: Request) {
   });
 
   const result = streamText({
-    model: customModel(model.apiIdentifier),
+    //model: customModel(model.apiIdentifier),
+    model: openrouterModel(model.apiIdentifier),
     system: systemPrompt,
     messages: coreMessages,
     maxSteps: 5,
+    /**
     experimental_activeTools: allTools,
     tools: {
       getWeather: {
@@ -333,6 +337,7 @@ export async function POST(request: Request) {
         },
       },
     },
+     */
     onFinish: async ({ response }) => {
       if (session.user?.id) {
         try {

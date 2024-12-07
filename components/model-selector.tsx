@@ -61,9 +61,9 @@ export function ModelSelector({
           >
             <div className="flex flex-col gap-1 items-start">
               {model.label}
-              {model.description && (
+              {model.apiIdentifier && (
                 <div className="text-xs text-muted-foreground">
-                  {model.description}
+                  {model.apiIdentifier}
                 </div>
               )}
             </div>
